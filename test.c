@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 
     printf("Test print\n");
 
-    printf("%i", memcmp(publicKey, check, 8) == 0);
+    printf("%i\n", mpzcmp(publicKey, check));
 
     return 0;
 }
