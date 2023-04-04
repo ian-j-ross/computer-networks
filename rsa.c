@@ -44,7 +44,7 @@ int verifySig(char *IP, char *rawMsg, char *signature)
 {
     char *hashString = sha256(rawMsg);
 
-    return strcmp(hashString, *rsaDecrypt(signature, rsaGetPubKey(IP))) == 0;
+    return strcmp(hashString, rsaDecrypt(signature, *rsaGetPubKey(IP))) == 0;
 }
 
 char *rsaEncrypt(char *hashedInput, char *privKey, char *pubKey)
