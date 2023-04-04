@@ -25,16 +25,19 @@ PRIV KEY 4: 2205efc81215c692c52c0d970260cc0bbdc55be4b998f99facbe57c863ab42bdd92a
 PRIV KEY 5: b2252cb4370f6d2e9fac48077492098df588bb256dcd31a129588443c75cb15a6a6d92398ed297f05e4b0bc1fdba7c68fa92ede7a9b380f1d90fd4ce0f9326d3ce814b2fba3a9f778dd33fe2911b902a6eed710e2d852bedfd85b2cb7398b6dbec8871cdaff3d9754dece74e8a4b19f62e949bef16dae4f91186b4a8bd8613dce216a35b6c688d8095c760ac709fda89738b1039ab32df1b1e9087061919dfbdf28d00a1e4cf0184e8caeba77b6e1b11bd71ea87c467e89e4ca8cfcb8737521e5af803c577bb07c070642358c7e62307de7519fa530752e13919f8c6a4d76845ffbc689401ecfd0d870b88e10f5cc8d02b733b363883d71ce8bac4aba7354b527dab93575cbcea0f2042271c55c8d0486bbea0b624aeccbd94f9674fe9790f00b6e7e10b7c419eec828a288cd24e3d2e2db39c6a67b2ee1daa07227976a05a8053248dff5bfc21bbfbe22e129814aef85b4d35f93604e86d3b2ca17a92adcd3d07cded50f2afe0ce7787185105c889cf0be7ca1389812e087ed748ea869b9c250210ec0e7dd9dd793de5ff0e6251fdb902d2a712e3aebe95cc7e7a1c9b6265aad2ac808af492bdb7e194e05b12c6829d719a4f39e739aad28a6a60e9a67ff69394f72adfedc27ba6b19a629942c87506aa58a10deb7863c9cae5665eb0f7bd704db18714685a5677c227022907b3345f05f68d744778cc07da53f4cd7f6f729
 */
 
-void rsaGetPubKey(char *IP, mpz_t *publicKey)
+char **rsaGetPubKey(char *IP)
 {
     for (int i = 0; i < NUM_NODES; i++)
     {
         if (strcmp(IP, Node_IPs[i]) == 0)
         {
             // If IP is found in the network list, find public Key
-            mpz_set_str(*publicKey, Node_PubKeys[i], 16);
+            // printf("Key FOUND\n");
+            // printf("%s\n", Node_PubKeys[i]);
+            return &Node_PubKeys[i];
         }
     }
+    return NULL; // Return null if no ip found
 }
 
 int verifySig(char *IP, char *rawMsg, char *signature)
