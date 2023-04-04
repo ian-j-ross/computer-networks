@@ -40,11 +40,36 @@ char **rsaGetPubKey(char *IP)
     return NULL; // Return null if no ip found
 }
 
-int verifySig(char *IP, char *rawMsg, char *signature)
+// Only Used When initially creating RSA keys for a new Node
+void generateKeys()
 {
-    char *hashString = sha256(rawMsg);
+    mpz_t p, q, n, e, d, phi;
+    gmp_randstate_t state;
+    unsigned long int seed = time(NULL);
 
-    return strcmp(hashString, rsaDecrypt(signature, *rsaGetPubKey(IP))) == 0;
+    mpz_inits(p, q, n, e, d, phi, NULL);
+    gmp_randinit_default(state);
+
+    gmp_randseed_ui(state, seed);
+
+    mpz_init_set_str(e, "65537", 10);
+    mpz_urandomb(p, state, 2048); // genertate 2048 bit random number for p
+    mpz_nextprime(p, p);          // get the closet prime from random number
+    mpz_urandomb(q, state, 2048); // generate rand num for q
+    mpz_nextprime(q, q);          // get closest prime
+
+    mpz_mul(n, p, q); // n = p*q
+
+    // phi = (p-1)*(q-1)
+    mpz_sub_ui(p, p, 1);
+    mpz_sub_ui(q, q, 1);
+    mpz_mul(phi, p, q);
+
+    // d = e^-1 mod d
+    mpz_invert(d, e, phi);
+
+    gmp_printf("n = %#Zx\n", n);
+    gmp_printf("d = %#Zx\n", d);
 }
 
 char *rsaEncrypt(char *hashedInput, char *privKey, char *pubKey)
@@ -78,4 +103,11 @@ char *rsaDecrypt(char *encryptedInput, char *pubKey)
 
     mpz_clears(encrypted, n, e, decrypted, NULL); // free memory
     return decryptedOutput;                       // need to free later
+}
+
+int verifySig(char *IP, char *rawMsg, char *signature)
+{
+    char *hashString = sha256(rawMsg);
+
+    return strcmp(hashString, rsaDecrypt(signature, *rsaGetPubKey(IP))) == 0;
 }

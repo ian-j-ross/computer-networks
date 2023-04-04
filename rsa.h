@@ -3,12 +3,13 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <gmp.h>
+#include <time.h>
 
 #ifndef RSA_H
 #define RSA_H
 
-#define NUM_NODES 5 // Number of Nodes in the network
-#define RSA_KEYLEN 1024
+#define NUM_NODES 5         // Number of Nodes in the network
+#define RSA_KEYLEN 256 / 32 // Number should be in multiples of 32bits
 
 // 5 is number of Nodes, 16 is length of IP, possibly could just store the last 3 digits of ip for less storage/lookup time
 extern char Node_IPs[NUM_NODES][16];
@@ -23,5 +24,7 @@ int verifySig(char *IP, char *rawMsg, char *signature); // Pass IP of sender, RA
 
 char *rsaEncrypt(char *hashedInput, char *privKey, char *pubKey);
 char *rsaDecrypt(char *encryptedInput, char *pubKey);
+
+void generateKeys();
 
 #endif
