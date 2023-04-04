@@ -9,13 +9,13 @@ int main(int argc, char const *argv[])
     mpz_t publicKey;
     mpz_t check;
 
-    printf("Test print\n");
-
     mpz_inits(publicKey, check, NULL);
 
     rsaGetPubKey(IP, &publicKey);
 
     mpz_set_str(check, "1232", 16);
+
+    printf("Test print\n");
 
     printf("%i", memcmp(publicKey, check, 8) == 0);
 
