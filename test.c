@@ -9,6 +9,8 @@ int main(int argc, char const *argv[])
     mpz_t publicKey;
     mpz_t check;
 
+    printf("Test print\n");
+
     mpz_inits(publicKey, check, NULL);
 
     rsaGetPubKey(IP, &publicKey);
