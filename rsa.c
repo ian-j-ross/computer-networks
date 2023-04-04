@@ -1,5 +1,3 @@
-#include <gmp.h>
-#include <stdio.h>
 #include "rsa.h"
 
 char Node_IPs[5][16] = {

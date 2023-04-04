@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <gmp.h>
 
 #ifndef RSA_H
@@ -17,7 +18,7 @@ extern char Node_PubKeys[NUM_NODES][RSA_KEYLEN];
 //  Digital Signature Functions
 //-------------------------------
 
-void rsaGetPubKey(char *IP, mpz_t *publicKey);      // Input an ip, publicKey[] will return null if user isnt in the network, or a key if they are
+void rsaGetPubKey(char *IP, mpz_t *publicKey);          // Input an ip, publicKey[] will return null if user isnt in the network, or a key if they are
 int verifySig(char *IP, char *rawMsg, char *signature); // Pass IP of sender, RAW message, and signature of sender, Will return 1 if match 0 if false.
 
 void rsaEncrypt(char *inputMsg, char *privKey, char *encryptedMsg);   // inputMsg should be 256bit hash, priv key and output will be in encrypted msg
