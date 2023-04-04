@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 
     mpz_set_str(check, "1232", 16);
 
-    printf("%i", memcmp(publicKey, check, 8));
+    printf("%i", memcmp(publicKey, check, 8) == 0);
 
     return 0;
 }
