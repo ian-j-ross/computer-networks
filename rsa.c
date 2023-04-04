@@ -32,7 +32,7 @@ void rsaGetPubKey(char *IP, mpz_t *publicKey)
 
 int verifySig(char *IP, char *rawMsg, char *signature)
 {
-    char *hashString = sha(rawMsg);
+    char *hashString = sha256(rawMsg);
 
-    return strcmp(hashString, sha(signature));
+    return strcmp(hashString, sha256(signature));
 }
