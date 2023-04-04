@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 
     rsaGetPubKey(IP, &publicKey);
 
-    mpz_set_str(&check, "1232", 16);
+    mpz_set_str(check, "1232", 16);
 
     printf("%i", memcmp(publicKey, check, 8));
 
