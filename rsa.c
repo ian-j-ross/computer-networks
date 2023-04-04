@@ -23,7 +23,7 @@ void rsaGetPubKey(char *IP, mpz_t *publicKey)
         if (strcmp(IP, Node_IPs[i]) == 0)
         {
             // If IP is found in the network list, find public Key
-            mpz_set_str(publicKey, Node_PubKeys[i]);
+            mpz_set_str(&publicKey, Node_PubKeys[i]);
 
             return;
         }

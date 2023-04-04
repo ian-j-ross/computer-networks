@@ -10,9 +10,9 @@ int main(int argc, char const *argv[])
 
     mpz_inits(publicKey, check, NULL);
 
-    rsaGetPubKey(IP, *publicKey);
+    rsaGetPubKey(IP, &publicKey);
 
-    mpz_set_str(check, "1232");
+    mpz_set_str(&check, "1232", 8);
 
     printf("%i", memcmp(publicKey, check));
 
