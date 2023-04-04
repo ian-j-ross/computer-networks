@@ -1,4 +1,5 @@
 #include <gmp.h>
+#include <stdio.h>
 #include "rsa.h"
 
 char Node_IPs[5][16] = {
@@ -17,18 +18,16 @@ char Node_PubKeys[5][RSA_KEYLEN] = {
 
 void rsaGetPubKey(char *IP, mpz_t *publicKey)
 {
-    mpz_init(publicKey)
-
-        for (int i = 0; i < NUM_NODES; i++)
+    for (int i = 0; i < NUM_NODES; i++)
     {
         if (strcmp(IP, Node_IPs[i]) == 0)
         {
             // If IP is found in the network list, find public Key
-            mpz_setstr(publicKey, Node_PubKeys[i]);
+            mpz_set_str(publicKey, Node_PubKeys[i]);
 
             return;
         }
     }
 
-    mpz_setstr(publicKey, NULL);
+    mpz_set_str(publicKey, NULL);
 }

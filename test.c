@@ -8,13 +8,13 @@ int main(int argc, char const *argv[])
     mpz_t publicKey;
     mpz_t check;
 
-    mpz_inits(publiKey, check, NULL);
+    mpz_inits(publicKey, check, NULL);
 
     rsaGetPubKey(IP, *publicKey);
 
-    mpz_setstr(publicKey, "1232");
+    mpz_set_str(check, "1232");
 
-    printf("%i", memcmp());
+    printf("%i", memcmp(publicKey, check));
 
     return 0;
 }
