@@ -1,4 +1,6 @@
 #include "rsa.h"
+#include "hash.h"
+#include "hash.c"
 
 char Node_IPs[5][16] = {
     "10.35.70.7",
@@ -26,4 +28,11 @@ void rsaGetPubKey(char *IP, mpz_t *publicKey)
             return;
         }
     }
+}
+
+int verifySig(char *IP, char *rawMsg, char *signature)
+{
+    char *hashString = sha(rawMsg);
+
+    return strcmp(hashString, sha(signature));
 }

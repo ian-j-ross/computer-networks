@@ -8,7 +8,7 @@
 #define RSA_H
 
 #define NUM_NODES 5  // Number of Nodes in the network
-#define RSA_KEYLEN 4 // Number should be in multiples of 32bits
+#define RSA_KEYLEN 4 // 1024-bit number in base 16
 
 // 5 is number of Nodes, 16 is length of IP, possibly could just store the last 3 digits of ip for less storage/lookup time
 extern char Node_IPs[NUM_NODES][16];
