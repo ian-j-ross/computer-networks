@@ -28,6 +28,4 @@ void rsaGetPubKey(char *IP, mpz_t *publicKey)
             return;
         }
     }
-
-    *publicKey = NULL;
 }
